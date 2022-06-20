@@ -1,0 +1,25 @@
+# Logs
+logs
+*.log
+.pnpm-debug.log*
+
+# Vscode workspaces
+*.code-workspace
+
+# Build and dependencies directories
+build/
+node_modules/
+
+# .env environment variable files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# generated typesafe-i18n files
+source/i18n/i18n-node.ts
+source/i18n/i18n-types.ts
+source/i18n/i18n-util.async.ts
+source/i18n/i18n-util.sync.ts
+source/i18n/i18n-util.ts

@@ -1,0 +1,25 @@
+{
+  "name": "plank",
+  "version": "1.0.0",
+  "main": "build/index.js",
+  "author": {
+    "name": "Maurício Braz Gonçalves",
+    "email": "unbluew@gmail.com",
+    "url": "https://www.github.com/mauriciobraz"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsnd --respawn --transpile-only --ignore-watch ./build source/index.ts",
+    "start": "node ./build/index.js"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "reflect-metadata": "^0.1.13",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "tslib": "^2.4.0"
+  }
+}
