@@ -1,8 +1,8 @@
-import 'dotenv/config';
-import type { Knex } from 'knex';
-import { resolve } from 'path';
+require('dotenv/config');
+const { resolve } = require('path');
 
-module.exports = <NodeJS.Dict<Knex.Config>>{
+/** @type {NodeJS.Dict<import('knex').Knex.Config>} */
+module.exports = {
   development: {
     client: 'better-sqlite3',
     useNullAsDefault: true,

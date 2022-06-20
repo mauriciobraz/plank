@@ -1,6 +1,6 @@
-import { BitFieldResolvable, IntentsString } from 'discord.js';
-import { Client } from 'discordx';
 import G from 'glob';
+import { BitFieldResolvable, IntentsString } from 'discord.js';
+import { Client, ClientOptions } from 'discordx';
 import { resolve } from 'path';
 
 export namespace DiscordClient {
@@ -16,6 +16,16 @@ export namespace DiscordClient {
     const client = new Client({
       intents: DiscordClient.INTENTS,
     });
+
+    if (process.env.NODE_ENV === 'development') {
+      // Registers the commands as guilded commands, this is faster but uses more API calls.
+      (<ClientOptions>client.options).botGuilds = [
+        async (client: Client) => {
+          const guilds = await client.guilds.fetch();
+          return guilds.map(guild => guild.id);
+        },
+      ];
+    }
 
     await importFolderFilesRecursive(DiscordClient.MODULES_PATH);
     await client.login(token);

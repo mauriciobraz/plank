@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import 'dotenv/config';
+
 import { DiscordClient } from './client';
 import { Dotenv } from './utils/dotenv';
 

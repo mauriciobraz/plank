@@ -18,14 +18,27 @@ export class ControllerModule {
     client: Client<true>
   ): Promise<void> {
     if (process.env.DEBUG) {
-      console.debug(`[ControllerModule.onInteractionCreate/2] ${interaction.id} created.`);
+      console.debug(
+        `[ControllerModule.onInteractionCreate/2] ${interaction.id}/${
+          interaction.isCommand() && interaction.commandName
+        } created.`
+      );
     }
 
     try {
       await client.executeInteraction(interaction);
     } catch (error) {
       if (process.env.DEBUG) {
-        console.error(`[ControllerModule.onInteractionCreate/2] ${interaction.id} failed.`, error);
+        console.debug(
+          `[ControllerModule.onInteractionCreate/2] ${interaction.id}/${
+            interaction.isCommand() && interaction.commandName
+          } failed.`,
+          error
+        );
+
+        if (interaction.isCommand() && error instanceof Error) {
+          await interaction.editReply(`${error.name}: ${error.message}`);
+        }
       }
     }
   }

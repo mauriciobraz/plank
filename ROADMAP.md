@@ -4,10 +4,10 @@
 
 - [ ] "Raffles", market place for items.
 
-  - [ ] `/raffle create title: string description: string tickets: int image-url: string` (Admin only)
-  - [ ] `/raffle delete item-id: int` (Admin only)
+  - [x] `/raffle create title: string description: string tickets: int image-url: string` (Admin only)
+  - [x] `/raffle delete item-id: int` (Admin only)
   - [ ] `/raffle buy item-id: int`
-  - [ ] `/raffle list`
+  - [x] `/raffle list`
 
 - [ ] Roles that multiplies the amount of money you earn, same as Raffles.
 
