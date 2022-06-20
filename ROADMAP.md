@@ -22,9 +22,15 @@
   - [ ] `/give member: guild-member amount: int`
   - [ ] `/daily`
 
-  - [ ] Worker and roullete.
+  - [ ] Gambling commands.
 
     - [ ] `/work`
     - [ ] `/slut`
     - [ ] `/coinflip`
     - [ ] `/russian-roullete`
+
+- [ ] Reward uses for:
+
+  - [ ] Message engagement, it should check hourly and give the rewards accordingly.
+  - [ ] Reaction egagement, when the user reacts a message in designated channels.
+  - [ ] Meme channel engagement, when some message of the user receives a certain amount of reactions in designated channels.
