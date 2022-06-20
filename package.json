@@ -20,11 +20,13 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
+    "better-sqlite3": "^7.5.3",
     "discord-api-types": "^0.34.0",
     "discord.js": "^13.8.0",
     "discordx": "^9.7.3",
     "dotenv": "^16.0.1",
     "glob": "^8.0.3",
+    "knex": "^2.1.0",
     "tslib": "^2.4.0"
   }
 }

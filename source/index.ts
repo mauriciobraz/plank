@@ -1,8 +1,10 @@
 import 'reflect-metadata';
 import 'dotenv/config';
+import { DiscordClient } from './client';
+import { Dotenv } from './utils/dotenv';
 
 async function main(): Promise<void> {
-  console.log('Hello world!');
+  await DiscordClient.initialize(Dotenv.getString('DISCORD_TOKEN'));
 }
 
 if (require.main === module) {

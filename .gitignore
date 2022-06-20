@@ -23,3 +23,8 @@ source/i18n/i18n-types.ts
 source/i18n/i18n-util.async.ts
 source/i18n/i18n-util.sync.ts
 source/i18n/i18n-util.ts
+
+# SQLite database files
+data/*.db
+data/*.sqlite
+data/*.sqlite3
