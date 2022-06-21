@@ -6,6 +6,8 @@ export namespace RawTypes {
     id: Increment;
 
     discord_id: string;
+    balance: number;
+    last_daily: Date | number | null;
 
     created_at: string;
     updated_at: string;

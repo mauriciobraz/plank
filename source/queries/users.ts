@@ -2,10 +2,14 @@ import { Snowflake } from 'discord.js';
 import { CamelCasedPropertiesDeep } from 'type-fest';
 
 import knex from '../knex';
-import { RawTypes } from './types';
+import { RawTypes } from './_types';
 
 export namespace UsersQueries {
-  type UserInput = Omit<RawTypes.User, 'id' | 'created_at' | 'updated_at'>;
+  type UserInput = {
+    discordId: Snowflake;
+    balance?: number;
+    lastDaily?: Date | number;
+  };
 
   /**
    * Get a user by Discord id.
@@ -38,8 +42,15 @@ export namespace UsersQueries {
    * @param args Data to create the user with.
    * @throws If the user is already in the database.
    */
-  export async function create(args: CamelCasedPropertiesDeep<UserInput>): Promise<RawTypes.User> {
-    const [user] = await knex<RawTypes.User>('users').insert({ discord_id: args.discordId }, '*');
+  export async function create(args: UserInput): Promise<RawTypes.User> {
+    const [user] = await knex<RawTypes.User>('users').insert(
+      {
+        discord_id: args.discordId,
+        balance: args.balance || 0,
+        last_daily: args.lastDaily,
+      },
+      '*'
+    );
 
     if (!user) {
       throw new Error('Failed to create user.');
@@ -71,17 +82,16 @@ export namespace UsersQueries {
    * @param data The data to update the user with.
    * @throws {NotExistsError} If the user does not exist.
    */
-  export async function update(
-    discordId: Snowflake,
-    data: Partial<Omit<CamelCasedPropertiesDeep<UserInput>, 'id'>>
-  ): Promise<void> {
-    if (await exists(discordId)) {
-      throw new UsersQueries.ExistsError(discordId);
-    }
+  export async function update(discordId: Snowflake, data: Partial<UserInput>): Promise<void> {
+    await createIfNotExists({ discordId });
 
     await knex<RawTypes.User>('users')
       .where('discord_id', discordId)
-      .update({ discord_id: data.discordId })
+      .update({
+        discord_id: data.discordId,
+        balance: data.balance,
+        last_daily: data.lastDaily,
+      })
       .returning('*');
   }
 
@@ -93,7 +103,7 @@ export namespace UsersQueries {
     await knex<RawTypes.User>('users').where('id', id).del();
   }
 
-  export class ExistsError extends Error {
+  export class NotExists extends Error {
     constructor(discordId: Snowflake) {
       super(`User with id ${discordId} already exists in the database.`);
     }

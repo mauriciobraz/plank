@@ -17,16 +17,18 @@
 
 - [ ] And basic economy commands.
 
-  - [ ] `/balance member?: guild-member`
-  - [ ] `/pay member: guild-member amount: int`
-  - [ ] `/give member: guild-member amount: int`
+  - [x] `/balance member?: guild-member`
+  - [x] `/transfer member: guild-member amount: int`
+  - [x] `/set-balance member: guild-member amount: int` (Admin only)
+  - [x] `/add-balance member: guild-member amount: int` (Admin only)
+  - [x] `/remove-balance member: guild-member amount: int` (Admin only)
   - [ ] `/daily`
 
   - [ ] Gambling commands.
 
-    - [ ] `/work`
+    - [x] `/work`
     - [ ] `/slut`
-    - [ ] `/coinflip`
+    - [x] `/coinflip`
     - [ ] `/russian-roullete`
 
 - [ ] Reward uses for:
