@@ -1,4 +1,4 @@
-import { Interaction, PermissionResolvable } from 'discord.js';
+import { ChannelResolvable, Interaction, PermissionResolvable } from 'discord.js';
 import { GuardFunction } from 'discordx';
 import { DiscordUtils } from '../utils/discord';
 
@@ -29,6 +29,18 @@ export function HasPermissions(...permissions: PermissionResolvable[]): GuardFun
       }
 
       await interaction.editReply("You don't have the required permissions to use this command.");
+    }
+  };
+}
+
+export function InChannels(...channels: ChannelResolvable[]): GuardFunction<Interaction> {
+  return async (interaction, _, next) => {
+    if (
+      channels.some(
+        channel => interaction.channel?.id === (typeof channel === 'string' ? channel : channel.id)
+      )
+    ) {
+      return await next();
     }
   };
 }

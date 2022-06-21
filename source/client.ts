@@ -8,13 +8,14 @@ export namespace DiscordClient {
 
   export const INTENTS: BitFieldResolvable<IntentsString, number> = [
     'GUILDS',
-    'GUILD_MEMBERS',
     'GUILD_MESSAGES',
+    'GUILD_MESSAGE_REACTIONS',
   ];
 
   export async function initialize(token: string): Promise<void> {
     const client = new Client({
       intents: DiscordClient.INTENTS,
+      partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'USER'],
     });
 
     if (process.env.NODE_ENV === 'development') {

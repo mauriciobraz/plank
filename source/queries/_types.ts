@@ -1,38 +1,41 @@
 export type Increment = number;
+
 export type SignedInteger = number;
 
-export namespace RawTypes {
-  export type User = {
-    id: Increment;
+export type KnexDate = string | number | Date;
 
+export type Timestamps = {
+  created_at: KnexDate;
+  updated_at: KnexDate;
+};
+
+export type PrepareRawTypeForInput<T> = Omit<T, 'id' | keyof Timestamps>;
+
+export namespace RawTypes {
+  export type User = Timestamps & {
+    id: Increment;
     discord_id: string;
     balance: number;
-    last_daily: Date | number | null;
-
-    created_at: string;
-    updated_at: string;
+    last_daily: KnexDate | null;
   };
 
-  export type UserRaffleJoin = {
+  export type UserRaffleJoin = Timestamps & {
     id: Increment;
-
     user_id: Increment;
     raffle_id: Increment;
-
-    created_at: string;
-    updated_at: string;
   };
 
-  export type Raffle = {
+  export type Raffle = Timestamps & {
     id: Increment;
-
     name: string;
     description: string;
     tickets_count: SignedInteger;
     image_url: string;
     creator_id: Increment;
+  };
 
-    created_at: string;
-    updated_at: string;
+  export type GuildConfig = Timestamps & {
+    id: Increment;
+    guild_id: string;
   };
 }
